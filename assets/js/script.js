@@ -114,7 +114,6 @@ for (let i = 0; i < filterBtn.length; i++) {
 }
 
 
-
 // contact form variables
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
@@ -154,6 +153,32 @@ for (let i = 0; i < navigationLinks.length; i++) {
         navigationLinks[i].classList.remove("active");
       }
     }
+// Assuming you have already selected your form element and stored it in 'form'
+// Add an event listener for the 'submit' event
+form.addEventListener("submit", function(event) {
+  // Prevent the default form submission
+  event.preventDefault();
+
+  // Create a FormData object, passing in the form
+  // This automatically gathers all form data
+  const formData = new FormData(form);
+
+  // If you want to log the form data or send it to a server, you can do so here
+  // For example, to log the data:
+  for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+  }
+
+  // Example of sending the form data to a server using fetch
+  // Replace 'YOUR_ENDPOINT_URL' with the URL you want to send the data to
+  fetch('https://webhook.site/a407a863-4ce6-4497-a903-b01681e8a574', {
+    method: 'POST',
+    body: formData
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+});
 
   });
 }
